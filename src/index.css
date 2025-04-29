@@ -1,0 +1,38 @@
+/* src/index.css */
+
+@font-face {
+  font-family: "Chillax";
+  src: url("./Chillax-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Chillax", sans-serif;
+}
+
+
+@keyframes slide {
+  0% {
+    background-position: top right;
+  }
+  50% {
+    background-position: bottom left;
+  }
+  100% {
+    background-position: top left;
+  }
+  150% {
+    background-position: bottom right;
+  }
+}
+
+.animate-slide {
+  animation: slide 6s ease-in-out infinite;
+}
+
+
