@@ -12,27 +12,27 @@
 @tailwind utilities;
 
 * {
-  font-family: "Chillax", sans-serif;
+  font-family: "Chillax";
 }
-
-
-@keyframes slide {
+@keyframes gradientMove {
   0% {
-    background-position: top right;
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 33% 50%;
   }
   50% {
-    background-position: bottom left;
+    background-position: 66% 50%;
+  }
+  75% {
+    background-position: 100% 50%;
   }
   100% {
-    background-position: top left;
-  }
-  150% {
-    background-position: bottom right;
+    background-position: 0% 50%;
   }
 }
 
-.animate-slide {
-  animation: slide 6s ease-in-out infinite;
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradientMove 6s ease-in-out infinite;
 }
-
-
