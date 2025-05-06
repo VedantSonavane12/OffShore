@@ -38,7 +38,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-sm fixed w-full z-50 font-sans">
+    <nav className="animate-gradient fixed w-full z-50  ">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left Side: Logo and Nav Links */}
@@ -46,7 +46,7 @@ const Navbar = () => {
             {/* Logo */}
             <a
               href="#"
-              className="text-2xl font-semibold text-gray-900"
+              className="text-2xl font-semibold text-white"
               data-aos="fade-left"
             >
               OffShore365
@@ -57,12 +57,12 @@ const Navbar = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="relative text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out group"
+                  className="relative text-white  px-3 py-2 rounded-md text-sm font-medium transition duration-300 ease-in-out group"
                   data-aos="fade-down"
                   data-aos-delay={index * 100}
                 >
                   {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
             </div>
@@ -73,7 +73,7 @@ const Navbar = () => {
             {/* Schedule a Meeting Button */}
             <a
               href="#"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition duration-300 ease-in-out"
+              className="bg-white text-blue-600  px-4 py-2 rounded-md text-sm font-bold hover:bg-blue-500 hover:text-white hover:border border-white  transition duration-300 ease-in-out"
               data-aos="fade-right"
               data-aos-delay="200"
             >
@@ -83,7 +83,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={toggleDropdown}
-                className="text-gray-700 hover:text-blue-600 p-3 rounded-full focus:outline-none transition duration-300 ease-in-out transform hover:scale-110"
+                className="text-blue-600 rounded-full border border-white hover:text-blue-800 p-2 bg-white rounded-full focus:outline-none transition duration-300 ease-in-out transform hover:scale-110"
                 aria-label="Toggle dropdown"
                 data-aos="fade-right"
                 data-aos-delay="300"
@@ -95,18 +95,21 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <circle cx="6" cy="12" r="2" />
-                  <circle cx="12" cy="12" r="2" />
-                  <circle cx="18" cy="12" shut r="2" />
+                  {/* Infinity Icon replaced with a More Icon */}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 </svg>
               </button>
               {isDropdownOpen && (
                 <div
-                  className="absolute right-0 mt-2 w-56 bg-white/80 backdrop-blur-md rounded-xl shadow-xl py-3 z-10 ring-1 ring-black/5 transform origin-top-right animate-dropdown"
+                  className="absolute right-0 mt-4 w-56 bg-white  backdrop-blur-md rounded-xl shadow-xl py-3 z-10 ring-1 ring-black/5 transform origin-top-right animate-dropdown"
                   data-aos="zoom-in"
                   data-aos-duration="400"
                 >
@@ -114,7 +117,7 @@ const Navbar = () => {
                     <a
                       key={item.label}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md mx-2 transition duration-200"
+                      className="block px-4 py-2 text-sm text-blue-600 font-bold hover:bg-blue-50 hover:text-blue-600 rounded-md mx-2 transition duration-200"
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       {item.label}
@@ -129,7 +132,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMobileMenu}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="text-white hover:text-blue-400 focus:outline-none"
               aria-label="Toggle menu"
               data-aos="fade-left"
             >
@@ -163,7 +166,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div
-          className="md:hidden bg-white shadow-sm"
+          className="md:hidden bg-gray-900 shadow-sm"
           data-aos="fade-down"
           data-aos-duration="400"
         >
@@ -173,7 +176,7 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 group"
+                className="relative block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-50 hover:text-blue-600 group"
                 onClick={toggleMobileMenu}
               >
                 {item.label}
@@ -184,7 +187,7 @@ const Navbar = () => {
             <div>
               <button
                 onClick={toggleDropdown}
-                className="w-full text-left flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                className="w-full text-left flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-50 hover:text-blue-600"
               >
                 <span>More</span>
                 <svg
@@ -198,9 +201,12 @@ const Navbar = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <circle cx="6" cy="12" r="2" />
-                  <circle cx="12" cy="12" r="2" />
-                  <circle cx="18" cy="12" r="2" />
+                  {/* Infinity Icon replaced with a More Icon */}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 </svg>
               </button>
               {isDropdownOpen && (
@@ -209,7 +215,7 @@ const Navbar = () => {
                     <a
                       key={item.label}
                       href={item.href}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-50 hover:text-blue-600"
                       onClick={toggleMobileMenu}
                     >
                       {item.label}
