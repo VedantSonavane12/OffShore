@@ -1,17 +1,29 @@
 // src/components/Loader.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Logo from '../assets/Logo.jpeg';
 
 const Loader = () => {
+  const [hide, setHide] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHide(true);
+    }, 3000); // 3 seconds before hiding
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="fixed inset-0 bg-white flex items-center justify-center z-50" data-aos="zoom-in">
-      <div className="text-center">
-        <h2 className="text-6xl sm:text-8xl font-extrabold text-blue-800 tracking-wide mb-4">
-          Offshore365 ∞
-        </h2>
-        <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
-          Empowering AEC transformation with infinite scalability, precision, and offshore efficiency.
-        </p>
-      </div>
+    <div
+      className={`fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-1000 ease-in-out ${
+        hide ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+    >
+      <img
+        src={Logo}
+        alt="Offshore365 Logo"
+        className="w-full h-full object-contain animate-fadeInScale"
+      />
     </div>
   );
 };
