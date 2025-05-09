@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Chillax";
-  src: url("./Goldplay-Regular.ttf") format("truetype");
+  src: url("./Chillax-Regular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -13,19 +13,13 @@
 
 * {
   font-family: "Chillax";
-}
-@keyframes gradientMove {
+}/* Animation for Gradient */
+@keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
-  25% {
-    background-position: 33% 50%;
-  }
   50% {
-    background-position: 66% 50%;
-  }
-  75% {
-    background-position: 100% 50%;
+    background-position: 0% 50%;
   }
   100% {
     background-position: 0% 50%;
@@ -33,6 +27,94 @@
 }
 
 .animate-gradient {
-  background-size: 300% 300%;
-  animation: gradientMove 6s ease-in-out infinite;
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+}
+
+/* Blob Animation */
+@keyframes blob {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.2) translate(20px, -20px);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Wave Animation */
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-wave {
+  animation: wave 10s ease-in-out infinite;
+}
+
+@keyframes wavePath {
+  0% {
+    d: path("M0,0 C300,50 900,50 1200,0 L1200,120 L0,120 Z");
+  }
+  50% {
+    d: path("M0,10 C350,60 850,40 1200,10 L1200,120 L0,120 Z");
+  }
+  100% {
+    d: path("M0,0 C300,50 900,50 1200,0 L1200,120 L0,120 Z");
+  }
+}
+
+.animate-wave-path {
+  animation: wavePath 8s ease-in-out infinite;
+}
+
+@keyframes wavePathDelayed {
+  0% {
+    d: path("M0,20 C400,70 800,30 1200,20 L1200,120 L0,120 Z");
+  }
+  50% {
+    d: path("M0,30 C450,80 750,20 1200,30 L1200,120 L0,120 Z");
+  }
+  100% {
+    d: path("M0,20 C400,70 800,30 1200,20 L1200,120 L0,120 Z");
+  }
+}
+
+.animate-wave-path-delayed {
+  animation: wavePathDelayed 10s ease-in-out infinite;
+}
+@keyframes breatheGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(173, 216, 230, 0.6),
+      0 0 30px rgba(173, 216, 230, 0.4);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 1),
+      0 0 40px rgba(173, 216, 230, 0.9),
+      0 0 60px rgba(173, 216, 230, 0.7);
+  }
 }
