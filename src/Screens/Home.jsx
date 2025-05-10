@@ -244,56 +244,48 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
         {/* Hero Section */}
         <section
           className="relative min-h-screen flex items-center justify-center py-12 sm:py-24 lg:py-36 bg-fixed bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgImage})` }}
+         
         >
           <div className="text-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 max-w-7xl mx-auto relative z-10">
             <h1
-              className="text-white leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[225px] font-light tracking-tight"
+              className="text-[#0474b3] font-extralight leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[225px] font-light tracking-tight"
               data-aos="zoom-in"
               data-aos-delay="100"
               data-aos-once="true"
             >
               Unlock
             </h1>
-           <h2
-  className="font-semibold text-white leading-none text-3xl sm:text-5xl md:text-6xl lg:text-[120px] flex items-center justify-center"
-  data-aos="zoom-in"
-  data-aos-delay="200"
-  data-aos-once="true"
->
-  <img
-    src={InfinityIcon}
-    alt="Infinity Symbol"
-    className="ml-2 lg:ml-4 mr-2 w-[225px] lg:w-[225px] h-full p-0 animate-breathe"
-    style={{
-      animation: 'breatheGlow 3s ease-in-out infinite',
-      filter:
-        'drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(173, 216, 230, 0.9))',
-    }}
-  />
-  Productivity
-</h2>
+            <h2
+              className=" secondary text-[#0474b3] leading-none text-3xl sm:text-5xl md:text-6xl lg:text-[100px] flex items-center justify-center"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+              data-aos-once="true"
+            >
+              <img
+                src={InfinityIcon}
+                alt="Infinity Symbol"
+                className="ml-2 lg:ml-4 mr-2 w-[225px] lg:w-[225px] h-full p-0 animate-breathe "
+                style={{
+                  animation: 'breatheGlow 3s ease-in-out infinite',
+                  filter:
+                    'drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(173, 216, 230, 0.9))',
+                }}
+              />
+              Productivity
+            </h2>
             <p
-              className="text-white text-lg sm:text-xl md:text-2xl lg:text-[30px] mt-4 sm:mt-6 max-w-2xl mx-auto"
+              className="text-[#0474b3] text-lg sm:text-xl md:text-2xl lg:text-[30px] mt-4 sm:mt-6 max-w-2xl mx-auto"
               data-aos="fade-up"
               data-aos-delay="300"
               data-aos-once="true"
             >
               With Tech-Powered Global Talent
             </p>
-            <div className="flex items-center justify-center mt-12">
-              <a
-                href="#learn-more"
-                className="text-white border border-white font-medium rounded-lg py-2 px-6 sm:py-3 sm:px-6 text-sm sm:text-base lg:text-lg inline-block shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-blue-500/50 shadow-blue-500/40"
-              >
-                Schedule a Meeting
-              </a>
-            </div>
-
+           
             <div className="mt-12 sm:mt-16 lg:mt-24 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6" data-aos="fade-up" data-aos-delay="400" data-aos-once="true">
               <a
                 href="#contact"
-                className="text-white font-light text-lg sm:text-xl lg:text-2xl text-center"
+                className="text-[#0474b3] font-light text-lg sm:text-xl lg:text-2xl text-center"
               >
                 Offshore AEC partner you can trust, for seamless project delivery!
               </a>
@@ -302,7 +294,7 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
         </section>
 
         {/* Features Section */}
-        <section id="features" className="min-h-screen flex flex-col justify-center items-center px-4 bg-white" aria-labelledby="features-title">
+        <section id="features" className="min-h-screen flex flex-col justify-center items-center px-4 bg-blue-30" aria-labelledby="features-title">
           <div className="max-w-4xl mx-auto text-center mb-12" data-aos="fade-up" data-aos-once="true">
             <h2 id="features-title" className="text-5xl md:text-6xl font-bold text-blue-900 mb-4">
               Achieve the extraordinary!

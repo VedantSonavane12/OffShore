@@ -57,11 +57,11 @@ const Navbar = () => {
     <nav
       className={`fixed z-50 top-0 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
         isScrolled
-          ? 'mt-4 bg-white backdrop-blur-md rounded-full px-6 max-w-6xl shadow-lg'
-          : 'w-full bg-transparent'
+          ? 'mt-4 bg-blue-600 backdrop-blur-md rounded-full px-3 max-w-6xl shadow-lg'
+          : 'w-full bg-transparent '
       }`}
     >
-      <div className="flex items-center px-6 p-6 justify-between border-b border-white h-14">
+      <div className="flex items-center px-6 p-6 justify-between  h-24">
         {/* Left Side: Logo and Nav Links */}
         <div className="flex items-center space-x-6">
           {/* Logo */}
@@ -79,8 +79,8 @@ const Navbar = () => {
                 key={item.label}
                 href={item.href}
                 className={`relative ${
-                  isScrolled ? 'text-blue-600' : 'text-white'
-                } px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out group`}
+                  isScrolled ? 'text-white' : 'text-[#0474b3]'
+                } px-3 py-2 rounded-lg text-sm font-bold transition duration-300 ease-in-out group `}
                 data-aos="fade-down"
                 data-aos-delay={index * 100}
               >
