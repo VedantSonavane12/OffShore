@@ -1,17 +1,22 @@
-/** @type {import('tailwindcss').Config} */
+import colors from 'tailwindcss/colors'
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
-        // Add any custom colors if needed
+        primary: colors.blue,
       },
-      // You can extend the scaling factor here if needed
-      scale: {
-        105: '1.05',
-        // You can add more custom scales if required
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 10s linear infinite',
       },
     },
   },
   plugins: [],
-};
+}

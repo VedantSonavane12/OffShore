@@ -14,6 +14,9 @@ import threeDVisualImage from '../assets/3d visual.jpg';
 import marketingImage from '../assets/marketing.jpg';
 import Admin from '../assets/admin.jpg';
 import itemimage from '../assets/clock.webp';
+import AutoCAD from '../assets/figma.avif';
+import { ToastContainer } from 'react-toastify';
+
 // Error Boundary Component
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
@@ -35,12 +38,44 @@ class ErrorBoundary extends React.Component {
 }
 
 // Main App Component
-const App = () => {
+const App = ({ handleSubmit, isSubmitting, PopupButton }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const cardRefs = useRef([]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const iconHoverVariants = {
+    hover: { scale: 1.2, rotate: 5, transition: { duration: 0.3 } },
+  };
+
+  const onFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const testimonials = [
     {
@@ -128,31 +163,31 @@ const App = () => {
       title: "Hourly Billing Model",
       description:
         "Clients are billed based on the number of hours worked by the outsourcing team. Suitable for projects with dynamic requirements and variable scopes.",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Image of a clock or workspace
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Fixed Fee Model",
       description:
         "A pre-defined, fixed cost is agreed upon for the entire project. Appropriate for well-defined projects with clear specifications.",
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21a1c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Image of a contract or agreement
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21a1c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Project Based Model",
       description:
         "Costs are determined based on the overall scope and milestones of the project. Ideal for projects with distinct phases and deliverables.",
-      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Image of a project plan or timeline
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Dedicated Team Model",
       description:
         "The outsourcing firm provides a dedicated team of architects and professionals exclusively for the client. Suited for long-term projects requiring ongoing collaboration and support.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Image of a team working together
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     },
     {
       title: "Performance Model",
       description:
         "Payment is linked to specific project outcomes or performance metrics. Encourages the outsourcing firm to meet or exceed predefined goals.",
-      image: "https://images.unsplash.com/photo-1551288049-b1f3a0a1a93c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", // Image of charts or performance metrics
+      image: "https://images.unsplash.com/photo-1551288049-b1f3a0a1a93c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     },
   ];
 
@@ -277,7 +312,6 @@ const App = () => {
             </div>
           </div>
         </section>
-
 
         {/* Features Section */}
         <section id="features" className="min-h-screen flex flex-col justify-center items-center px-4 bg-white" aria-labelledby="features-title">
@@ -479,48 +513,6 @@ const App = () => {
               ))}
             </div>
           </div>
-
-          <style jsx>{`
-            @keyframes slide-in-left {
-              0% {
-                transform: translateX(-100vw) rotate(0deg);
-                opacity: 0;
-              }
-              100% {
-                transform: translateX(0) rotate(-6deg);
-                opacity: 1;
-              }
-            }
-
-            @keyframes slide-in-right {
-              0% {
-                transform: translateX(100vw) rotate(0deg);
-                opacity: 0;
-              }
-              100% {
-                transform: translateX(0) rotate(6deg);
-                opacity: 1;
-              }
-            }
-
-            .animate-slide-in-left {
-              animation: slide-in-left 0.8s ease-out forwards;
-            }
-
-            .animate-slide-in-right {
-              animation: slide-in-right 0.8s ease-out forwards;
-            }
-
-            @keyframes draw-line {
-              to {
-                stroke-dashoffset: 0;
-              }
-            }
-
-            .animate-draw-line .path {
-              animation: draw-line 1s ease-in-out forwards;
-            }
-          `}</style>
         </section>
 
         {/* Talent & Technology Section */}
@@ -590,29 +582,50 @@ const App = () => {
               ))}
             </div>
 
-            <div className="max-w-full mx-auto mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
-              {[
-                { name: "AutoCAD", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Revit", url: "/placeholder.svg?height=40&width=40" },
-                { name: "3ds Max", url: "/placeholder.svg?height=40&width=40" },
-                { name: "V-Ray", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Lumion", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Photoshop", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Premiere Pro", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Illustrator", url: "/placeholder.svg?height=40&width=40" },
-                { name: "After Effects", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Node.js", url: "/placeholder.svg?height=40&width=40" },
-                { name: "Cinema 4D", url: "/placeholder.svg?height=40&width=40" },
-              ].map((item, index) => (
-                <div key={index} className="flex flex-col items-center" data-aos="fade-up" data-aos-delay={index * 100} data-aos-once="true">
-                  <img
-                    src={item.url || "/placeholder.svg"}
-                    alt={`${item.name} logo`}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-md shadow-sm hover:shadow-md transition-all transform hover:scale-110"
-                  />
-                  <p className="text-blue-700 text-xs sm:text-sm mt-2">{item.name}</p>
-                </div>
-              ))}
+            <div className="relative overflow-hidden mt-24">
+              {/* Gradient Overlays */}
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white to-transparent z-10" />
+
+              {/* Scrolling Container */}
+              <div className="animate-marquee flex whitespace-nowrap gap-10 px-24">
+                {[
+                  { name: "AutoCAD", url: AutoCAD },
+                  { name: "Revit", url: AutoCAD },
+                  { name: "3ds Max", url: AutoCAD },
+                  { name: "V-Ray", url: AutoCAD },
+                  { name: "Lumion", url: AutoCAD },
+                  { name: "Photoshop", url: AutoCAD },
+                  { name: "Premiere Pro", url: AutoCAD },
+                  { name: "Illustrator", url: AutoCAD },
+                  { name: "After Effects", url: AutoCAD },
+                  { name: "Node.js", url: AutoCAD },
+                  { name: "Cinema 4D", url: AutoCAD },
+                ]
+                  .concat([
+                    { name: "AutoCAD", url: AutoCAD },
+                    { name: "Revit", url: AutoCAD },
+                    { name: "3ds Max", url: AutoCAD },
+                    { name: "V-Ray", url: AutoCAD },
+                    { name: "Lumion", url: AutoCAD },
+                    { name: "Photoshop", url: AutoCAD },
+                    { name: "Premiere Pro", url: AutoCAD },
+                    { name: "Illustrator", url: AutoCAD },
+                    { name: "After Effects", url: AutoCAD },
+                    { name: "Node.js", url: AutoCAD },
+                    { name: "Cinema 4D", url: AutoCAD },
+                  ])
+                  .map((item, index) => (
+                    <div key={index} className="flex flex-col items-center w-24 shrink-0">
+                      <img
+                        src={item.url || "/placeholder.svg"}
+                        alt={`${item.name} logo`}
+                        className="h-10 w-auto"
+                      />
+                      <p className="text-gray-700 text-xs sm:text-sm mt-2 text-center">{item.name}</p>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         </section>
@@ -636,24 +649,22 @@ const App = () => {
 
             <div className="space-y-12 relative">
               {productivityModels.map((item, index) => {
-                // Define the color themes
                 const colorThemes = [
-                  { text: "text-green-600", titleText: "text-green-700", bg: "bg-green-50", border: "border-green-300", boxBg: "bg-white" }, // Green Theme
-                  { text: "text-gray-700", titleText: "text-gray-800", bg: "bg-gray-200", border: "border-gray-300", boxBg: "bg-white" }, // Gray Theme 1
-                  { text: "text-gray-100", titleText: "text-gray-100", bg: "bg-gray-800", border: "border-gray-300", boxBg: "bg-gray-700" }, // Gray Theme 2
-                  { text: "text-blue-600", titleText: "text-blue-700", bg: "bg-blue-200", border: "border-blue-300", boxBg: "bg-white" }, // Blue Theme
-                  { text: "text-orange-600", titleText: "text-orange-700", bg: "bg-orange-50", border: "border-orange-300", boxBg: "bg-white" }, // Orange Theme
-                  { text: "text-red-600", titleText: "text-red-700", bg: "bg-red-50", border: "border-red-300", boxBg: "bg-white" }, // Red Theme
+                  { text: "text-green-600", titleText: "text-green-700", bg: "bg-green-50", border: "border-green-300", boxBg: "bg-white" },
+                  { text: "text-gray-700", titleText: "text-gray-800", bg: "bg-gray-200", border: "border-gray-300", boxBg: "bg-white" },
+                  { text: "text-gray-100", titleText: "text-gray-100", bg: "bg-gray-800", border: "border-gray-300", boxBg: "bg-gray-700" },
+                  { text: "text-blue-600", titleText: "text-blue-700", bg: "bg-blue-200", border: "border-blue-300", boxBg: "bg-white" },
+                  { text: "text-orange-600", titleText: "text-orange-700", bg: "bg-orange-50", border: "border-orange-300", boxBg: "bg-white" },
+                  { text: "text-red-600", titleText: "text-red-700", bg: "bg-red-50", border: "border-red-300", boxBg: "bg-white" },
                 ];
 
-                // Map the card to a color theme based on its index
                 const theme = colorThemes[index % colorThemes.length];
 
                 return (
                   <motion.div
                     key={index}
                     ref={(el) => (cardRefs.current[index] = el)}
-                    className={`${theme.bg} rounded-3xl p-8 flex flex-col md:flex-row items-center text-left shadow-lg sticky top-20 transition-all transform hover:-translate-y-2 hover:shadow-xl hover:scale-[1.02] w-full  mx-auto`}
+                    className={`${theme.bg} rounded-3xl p-8 flex flex-col md:flex-row items-center text-left shadow-lg sticky top-20 transition-all transform hover:-translate-y-2 hover:shadow-xl hover:scale-[1.02] w-full mx-auto`}
                     style={{ zIndex: 1 }}
                     variants={cardVariants}
                     initial="initial"
@@ -665,8 +676,7 @@ const App = () => {
                     role="article"
                     aria-labelledby={`productivity-${index}`}
                   >
-                    {/* Text Box (Left) */}
-                    <div className={`md:w-2/4 p-6  bg-opacity-80 rounded-xl   `}>
+                    <div className={`md:w-2/4 p-6 bg-opacity-80 rounded-xl`}>
                       <h3
                         id={`productivity-${index}`}
                         className={`text-xl sm:text-2xl md:text-6xl font-semibold ${theme.titleText} mb-3`}
@@ -676,9 +686,8 @@ const App = () => {
                       <p className={`text-base sm:text-md md:text-xl mt-24 px-12 ${theme.text}`}>{item.description}</p>
                     </div>
 
-                    {/* Image Box (Right) */}
                     <div className="md:w-2/4 flex justify-center mt-6 md:mt-0 md:ml-6">
-                      <div className={` p-4  flex items-center justify-center w-auto h-auto md:h-full`}>
+                      <div className={`p-4 flex items-center justify-center w-auto h-auto md:h-full`}>
                         <img
                           src={itemimage}
                           alt={item.title}
@@ -740,260 +749,8 @@ const App = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-20" aria-labelledby="contact-title">
-          <div className="container mx-auto px-6">
-            <div
-              className="max-w-6xl mx-auto bg-blue-100 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl overflow-hidden border border-blue-200"
-              data-aos="fade-up"
-              data-aos-once="true"
-            >
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 bg-blue-500 p-12 text-blue-100">
-                  <h2 id="contact-title" className="text-3xl font-bold mb-6 tracking-tight" data-aos="fade-right" data-aos-once="true">
-                    Get in Touch
-                  </h2>
-                  <p className="text-blue-200 mb-8" data-aos="fade-right" data-aos-delay="100" data-aos-once="true">
-                    Ready to start your digital transformation journey? Contact us today to discuss how we can help your business thrive.
-                  </p>
-                  <div className="space-y-4">
-                    <div className="flex items-start" data-aos="fade-right" data-aos-delay="200" data-aos-once="true">
-                      <svg
-                        className="w-6 h-6 mr-3 text-blue-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      <div>
-                        <h3 className="font-semibold text-blue-300">Address</h3>
-                        <p>123 Innovation Drive, Tech City, TC 12345</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start" data-aos="fade-right" data-aos-delay="300" data-aos-once="true">
-                      <svg
-                        className="w-6 h-6 mr-3 text-blue-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 0 002 2z"
-                        />
-                      </svg>
-                      <div>
-                        <h3 className="font-semibold text-blue-300">Email</h3>
-                        <p>info@offshore365.com</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start" data-aos="fade-right" data-aos-delay="400" data-aos-once="true">
-                      <svg
-                        className="w-6 h-6 mr-3 text-blue-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                      <div>
-                        <h3 className="font-semibold text-blue-300">Phone</h3>
-                        <p>+1 (555) 123-4567</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-1/2 p-12">
-                  <h2 className="text-3xl font-bold text-blue-900 mb-6 tracking-tight" data-aos="fade-left" data-aos-once="true">
-                    Send Us a Message
-                  </h2>
-                  <div className="space-y-6">
-                    <div data-aos="fade-left" data-aos-delay="100" data-aos-once="true">
-                      <label htmlFor="name" className="block text-sm font-medium text-blue-700 mb-1">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-blue-100 bg-opacity-90 backdrop-filter backdrop-blur-sm transition-all"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div data-aos="fade-left" data-aos-delay="200" data-aos-once="true">
-                      <label htmlFor="email" className="block text-sm font-medium text-blue-700 mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-blue-100 bg-opacity-90 backdrop-filter backdrop-blur-sm transition-all"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                    <div data-aos="fade-left" data-aos-delay="300" data-aos-once="true">
-                      <label htmlFor="message" className="block text-sm font-medium text-blue-700 mb-1">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        rows={4}
-                        className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-blue-100 bg-opacity-90 backdrop-filter backdrop-blur-sm transition-all"
-                        placeholder="How can we help you?"
-                      ></textarea>
-                    </div>
-                    <button
-                      type="button"
-                      className="w-full bg-blue-500 text-blue-100 px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
-                      data-aos="fade-left"
-                      data-aos-delay="400"
-                      data-aos-once="true"
-                    >
-                      Send Message
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="bg-blue-800 text-blue-100 py-12" data-aos="fade-up" data-aos-once="true">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold text-blue-400 mb-4 tracking-tight">Offshore 365</h3>
-                <p className="text-blue-300">
-                  Innovative AEC solutions for businesses of all sizes. We help you transform and thrive in the digital age with our global talent pool.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#features" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Features
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#services" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#testimonials" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Testimonials
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#contact" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Services</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Architectural Design
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      BIM Modeling
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      3D Visualization
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                      Interior Design
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-                <div className="flex space-x-4 mb-4">
-                  <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                    </svg>
-                  </a>
-                  <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </a>
-                  <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.5c0-1.105-.896-2-2-2s-2 .895-2 2 .896 2 2 2 2-.895 2-2zm10 12.5h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                  </a>
-                  <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                  </a>
-                </div>
-                <p className="text-blue-300">Subscribe to our newsletter for the latest updates.</p>
-                <div className="mt-4 flex">
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-blue-100 bg-opacity-90 backdrop-filter backdrop-blur-sm transition-all"
-                  />
-                  <button className="bg-blue-500 text-blue-100 px-4 py-2 rounded-r-md hover:bg-blue-600 transition-colors shadow-md">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="border-t border-blue-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-blue-300">© {new Date().getFullYear()} Offshore 365. All rights reserved.</p>
-              <div className="mt-4 md:mt-0">
-                <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors mr-4">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-blue-300 hover:text-blue-400 transition-colors">
-                  Terms of Service
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        {/* Updated Contact Us Section */}
+       
       </div>
     </ErrorBoundary>
   );
