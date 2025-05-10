@@ -45,7 +45,7 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
 
   const cardRefs = useRef([]);
 
- const containerVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -298,7 +298,6 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
             </div>
           </div>
         </section>
-
 
         {/* Features Section */}
         <section id="features" className="min-h-screen flex flex-col justify-center items-center px-4 bg-white" aria-labelledby="features-title">
@@ -611,51 +610,51 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
               ))}
             </div>
 
-           <div className="relative overflow-hidden mt-24">
-  {/* Gradient Overlays */}
-  <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white to-transparent z-10" />
-  <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white to-transparent z-10" />
+            <div className="relative overflow-hidden mt-24">
+              {/* Gradient Overlays */}
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white to-transparent z-10" />
 
-  {/* Scrolling Container */}
-  <div className="animate-marquee flex whitespace-nowrap gap-10 px-24">
-    {[
-      { name: "AutoCAD", url: AutoCAD },
-      { name: "Revit", url: AutoCAD },
-      { name: "3ds Max", url: AutoCAD },
-      { name: "V-Ray", url: AutoCAD },
-      { name: "Lumion", url: AutoCAD },
-      { name: "Photoshop", url: AutoCAD },
-      { name: "Premiere Pro", url: AutoCAD },
-      { name: "Illustrator", url: AutoCAD },
-      { name: "After Effects", url: AutoCAD },
-      { name: "Node.js", url: AutoCAD },
-      { name: "Cinema 4D", url: AutoCAD },
-    ]
-      .concat([
-        { name: "AutoCAD", url: AutoCAD },
-        { name: "Revit", url: AutoCAD },
-        { name: "3ds Max", url: AutoCAD },
-        { name: "V-Ray", url: AutoCAD },
-        { name: "Lumion", url: AutoCAD },
-        { name: "Photoshop", url: AutoCAD },
-        { name: "Premiere Pro", url: AutoCAD },
-        { name: "Illustrator", url: AutoCAD },
-        { name: "After Effects", url: AutoCAD },
-        { name: "Node.js", url: AutoCAD },
-        { name: "Cinema 4D", url: AutoCAD },
-      ])
-      .map((item, index) => (
-        <div key={index} className="flex flex-col items-center w-24 shrink-0">
-          <img
-            src={item.url || "/placeholder.svg"}
-            alt={`${item.name} logo`}
-            className="h-10 w-auto"
-          />
-          <p className="text-gray-700 text-xs sm:text-sm mt-2 text-center">{item.name}</p>
-        </div>
-      ))}
-  </div>
-</div>
+              {/* Scrolling Container */}
+              <div className="animate-marquee flex whitespace-nowrap gap-10 px-24">
+                {[
+                  { name: "AutoCAD", url: AutoCAD },
+                  { name: "Revit", url: AutoCAD },
+                  { name: "3ds Max", url: AutoCAD },
+                  { name: "V-Ray", url: AutoCAD },
+                  { name: "Lumion", url: AutoCAD },
+                  { name: "Photoshop", url: AutoCAD },
+                  { name: "Premiere Pro", url: AutoCAD },
+                  { name: "Illustrator", url: AutoCAD },
+                  { name: "After Effects", url: AutoCAD },
+                  { name: "Node.js", url: AutoCAD },
+                  { name: "Cinema 4D", url: AutoCAD },
+                ]
+                  .concat([
+                    { name: "AutoCAD", url: AutoCAD },
+                    { name: "Revit", url: AutoCAD },
+                    { name: "3ds Max", url: AutoCAD },
+                    { name: "V-Ray", url: AutoCAD },
+                    { name: "Lumion", url: AutoCAD },
+                    { name: "Photoshop", url: AutoCAD },
+                    { name: "Premiere Pro", url: AutoCAD },
+                    { name: "Illustrator", url: AutoCAD },
+                    { name: "After Effects", url: AutoCAD },
+                    { name: "Node.js", url: AutoCAD },
+                    { name: "Cinema 4D", url: AutoCAD },
+                  ])
+                  .map((item, index) => (
+                    <div key={index} className="flex flex-col items-center w-24 shrink-0">
+                      <img
+                        src={item.url || "/placeholder.svg"}
+                        alt={`${item.name} logo`}
+                        className="h-10 w-auto"
+                      />
+                      <p className="text-gray-700 text-xs sm:text-sm mt-2 text-center">{item.name}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
 
 
           </div>
@@ -784,7 +783,6 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
           </div>
         </section>
 
-      
         {/* Footer */}
         <footer className="bg-blue-800 text-blue-100 py-12" data-aos="fade-up" data-aos-once="true">
           <div className="container mx-auto px-6">

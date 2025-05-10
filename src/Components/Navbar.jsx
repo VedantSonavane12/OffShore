@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+// Import the logo image
+import logoImage from '../assets/image-removebg-preview.png';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,20 +57,20 @@ const Navbar = () => {
     <nav
       className={`fixed z-50 top-0 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
         isScrolled
-          ? 'mt-4 bg-white backdrop-blur-md rounded-full  px-6  max-w-6xl shadow-lg'
-          : 'w-full  bg-transparent'
+          ? 'mt-4 bg-white backdrop-blur-md rounded-full px-6 max-w-6xl shadow-lg'
+          : 'w-full bg-transparent'
       }`}
     >
-      <div className="flex items-center px-6 p-6 justify-between  border-b border-white h-14">
+      <div className="flex items-center px-6 p-6 justify-between border-b border-white h-14">
         {/* Left Side: Logo and Nav Links */}
         <div className="flex items-center space-x-6">
           {/* Logo */}
-          <a
-            href="#"
-            className={`text-xl font-bold ${isScrolled ? 'text-blue-600' : 'text-white'} tracking-wide`}
-            data-aos="fade-left"
-          >
-            OffShore365
+          <a href="#" data-aos="fade-left">
+            <img
+              src={logoImage}
+              alt="OffShore365 Logo"
+              className={`h-24 w-full ${isScrolled ? 'filter brightness-0' : 'filter brightness-100'}`}
+            />
           </a>
           {/* Nav Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
@@ -76,7 +78,9 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className={`relative ${isScrolled ? 'text-blue-600' : 'text-white'} px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out group`}
+                className={`relative ${
+                  isScrolled ? 'text-blue-600' : 'text-white'
+                } px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out group`}
                 data-aos="fade-down"
                 data-aos-delay={index * 100}
               >
@@ -155,7 +159,9 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
           <button
             onClick={toggleMobileMenu}
-            className={`${isScrolled ? 'text-blue-600' : 'text-white'} hover:text-blue-200 focus:outline-none`}
+            className={`${
+              isScrolled ? 'text-blue-600' : 'text-white'
+            } hover:text-blue-200 focus:outline-none`}
             aria-label="Toggle menu"
             data-aos="fade-left"
           >
@@ -203,7 +209,9 @@ const Navbar = () => {
                 key={item.label}
                 href={item.href}
                 className={`relative block px-3 py-2 rounded-md text-base font-medium ${
-                  isScrolled ? 'text-blue-600 hover:bg-blue-50' : 'text-white hover:bg-white/20'
+                  isScrolled
+                    ? 'text-blue-600 hover:bg-blue-50'
+                    : 'text-white hover:bg-white/20'
                 } group`}
                 onClick={toggleMobileMenu}
               >
@@ -220,7 +228,9 @@ const Navbar = () => {
               <button
                 onClick={toggleDropdown}
                 className={`w-full text-left flex items-center justify-between px-3 py-2 rounded-md text-base font-medium ${
-                  isScrolled ? 'text-blue-600 hover:bg-blue-50' : 'text-white hover:bg-white/20'
+                  isScrolled
+                    ? 'text-blue-600 hover:bg-blue-50'
+                    : 'text-white hover:bg-white/20'
                 }`}
               >
                 <span>More</span>
@@ -253,7 +263,9 @@ const Navbar = () => {
                       key={item.label}
                       href={item.href}
                       className={`block px-3 py-2 rounded-md text-base font-medium ${
-                        isScrolled ? 'text-blue-600 hover:bg-blue-50' : 'text-white hover:bg-white/20'
+                        isScrolled
+                          ? 'text-blue-600 hover:bg-blue-50'
+                          : 'text-white hover:bg-white/20'
                       }`}
                       onClick={toggleMobileMenu}
                     >
