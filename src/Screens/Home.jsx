@@ -16,6 +16,7 @@ import Admin from '../assets/admin.jpg';
 import itemimage from '../assets/clock.webp';
 import AutoCAD from '../assets/figma.avif';
 import { ToastContainer } from 'react-toastify';
+import InfinityIcon from '../assets/infinity.svg'; // adjust the path if needed
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component {
@@ -254,23 +255,24 @@ const App = ({ handleSubmit, formData, handleChange, isSubmitting, PopupButton }
             >
               Unlock
             </h1>
-            <h2
-              className="font-semibold text-white leading-none text-3xl sm:text-5xl md:text-6xl lg:text-[120px] flex items-center justify-center"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-              data-aos-once="true"
-            >
-              <span
-                className="ml-2 lg:ml-4 mr-2 text-white text-5xl lg:text-[160px] animate-breathe"
-                style={{
-                  animation: 'breatheGlow 3s ease-in-out infinite',
-                  textShadow: '0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(173, 216, 230, 0.9)'
-                }}
-              >
-                ∞
-              </span>
-              Productivity
-            </h2>
+           <h2
+  className="font-semibold text-white leading-none text-3xl sm:text-5xl md:text-6xl lg:text-[120px] flex items-center justify-center"
+  data-aos="zoom-in"
+  data-aos-delay="200"
+  data-aos-once="true"
+>
+  <img
+    src={InfinityIcon}
+    alt="Infinity Symbol"
+    className="ml-2 lg:ml-4 mr-2 w-[225px] lg:w-[225px] h-full p-0 animate-breathe"
+    style={{
+      animation: 'breatheGlow 3s ease-in-out infinite',
+      filter:
+        'drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 20px rgba(173, 216, 230, 0.9))',
+    }}
+  />
+  Productivity
+</h2>
             <p
               className="text-white text-lg sm:text-xl md:text-2xl lg:text-[30px] mt-4 sm:mt-6 max-w-2xl mx-auto"
               data-aos="fade-up"
