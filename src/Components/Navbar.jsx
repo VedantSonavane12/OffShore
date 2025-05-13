@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 // Import the logo image
-import logoImage from '../assets/image-removebg-preview.png';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -64,14 +63,7 @@ const Navbar = () => {
       <div className="flex items-center px-6 p-6 justify-between  h-24">
         {/* Left Side: Logo and Nav Links */}
         <div className="flex items-center space-x-6">
-          {/* Logo */}
-          <a href="#" data-aos="fade-left">
-            <img
-              src={logoImage}
-              alt="OffShore365 Logo"
-              className={`h-24 w-full ${isScrolled ? 'filter brightness-0' : 'filter brightness-100'}`}
-            />
-          </a>
+          
           {/* Nav Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((item, index) => (
