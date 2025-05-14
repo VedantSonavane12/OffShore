@@ -2,6 +2,8 @@ import React from 'react';
 import Hero from './Hero';
 import Features from './Features';
 import Steps from './Steps'
+import Models from './model'
+
 
 const Home = () => {
     return (
@@ -9,6 +11,7 @@ const Home = () => {
             <Hero />
             <Features />
             <Steps />
+               <Models />
 
 
         </div>

@@ -63,8 +63,9 @@ const StepsSection = () => {
               <motion.div
                 key={index}
                 data-aos={animationType}
-                className="e-card playing relative w-[400px] h-[400px] bg-transparent shadow-2xl rounded-2xl overflow-hidden transform transition duration-500 hover:scale-105"
+                className="group e-card playing relative w-[300px] h-[400px] bg-transparent shadow-2xl rounded-2xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-3xl transition ease-in-out duration-500"
               >
+
                 {/* Waves */}
                 <div
                   className="wave absolute w-[540px] h-[700px] opacity-60 left-0 top-0 -ml-[50%] -mt-[70%] rounded-[40%]"
@@ -86,8 +87,13 @@ const StepsSection = () => {
 
                 {/* Card Content */}
                 <div className="infotop absolute top-36 left-0 right-0 text-center text-white px-6">
-                  <h3 className="text-4xl font-semibold mb-8">{step.title}</h3>
-                  <p className="text-xl p-2 font-light">{step.description}</p>
+                  <h3 className="text-4xl font-semibold mb-8 transition-transform duration-300 group-hover:scale-105">
+                    {step.title}
+                  </h3>
+                  <p className="text-xl p-2 font-light transition-transform duration-300 group-hover:scale-105">
+                    {step.description}
+                  </p>
+
                 </div>
               </motion.div>
             );
@@ -98,7 +104,7 @@ const StepsSection = () => {
       {/* Wave Animation */}
       <style jsx>{`
         .wave {
-          animation: wave 55s infinite linear;
+          animation: wave 155s infinite linear;
         }
 
         .playing .wave {
@@ -106,19 +112,19 @@ const StepsSection = () => {
         }
 
         .wave:nth-child(2) {
-          animation-duration: 50s;
+          animation-duration: 100s;
         }
 
         .playing .wave:nth-child(2) {
-          animation-duration: 4000ms;
+          animation-duration: 8000ms;
         }
 
         .wave:nth-child(3) {
-          animation-duration: 45s;
+          animation-duration: 145s;
         }
 
         .playing .wave:nth-child(3) {
-          animation-duration: 5000ms;
+          animation-duration: 10000ms;
         }
 
         @keyframes wave {
