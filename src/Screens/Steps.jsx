@@ -31,16 +31,25 @@ const steps = [
 ];
 
 const StepsSection = () => {
-  const [activeGradient, setActiveGradient] = useState('');
+  const [activeGradientIndex, setActiveGradientIndex] = useState(0);
+  const [hoveredGradient, setHoveredGradient] = useState('');
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
+
+    const interval = setInterval(() => {
+      setActiveGradientIndex((prevIndex) => (prevIndex + 1) % steps.length);
+    }, 5000); // Change gradient every 5 seconds
+
+    return () => clearInterval(interval);
   }, []);
+
+  const activeGradient = hoveredGradient || steps[activeGradientIndex].gradient;
 
   return (
     <section
-      className="py-20 min-h-screen transition-all duration-500"
-      style={{ background: activeGradient || '#f9fafb' }}
+      className="py-20 min-h-screen transition-all duration-1000 text-white"
+      style={{ background: activeGradient }}
     >
       {/* Header */}
       <motion.div
@@ -50,10 +59,10 @@ const StepsSection = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
           Powering 365 Productivity
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg max-w-2xl mx-auto">
           Our Process, Explained In 4 Simple Steps
         </p>
       </motion.div>
@@ -69,13 +78,15 @@ const StepsSection = () => {
                 key={index}
                 data-aos={animationType}
                 className="group e-card playing relative w-[300px] h-[400px] bg-transparent shadow-2xl rounded-2xl overflow-hidden transform transition duration-500 hover:scale-105"
-                onMouseEnter={() => setActiveGradient(step.gradient)}
-                onMouseLeave={() => setActiveGradient('')}
+                onMouseEnter={() => setHoveredGradient(step.gradient)}
+                onMouseLeave={() => setHoveredGradient('')}
                 style={{
-                  border: activeGradient === step.gradient ? '2px solid white' : '2px solid transparent',
+                  border:
+                    activeGradient === step.gradient
+                      ? '2px solid white'
+                      : '2px solid transparent',
                 }}
               >
-                {/* Waves */}
                 {[...Array(3)].map((_, i) => (
                   <div
                     key={i}
