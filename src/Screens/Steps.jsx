@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,36 +8,41 @@ const steps = [
     id: 1,
     title: "Project Idea",
     description: "Phasellus urna felis, vehicula a ultricie vulp utate ut ultricies.",
-    gradient: "linear-gradient(744deg, #8B0000, #B22222 60%, #FF4500)", // Rich Red
+    gradient: "linear-gradient(744deg, #8B0000, #B22222 60%, #FF4500)", // Red
   },
   {
     id: 2,
     title: "Finding Inspiration",
     description: "Phasellus urna felis, vehicula a ultricie vulp utate ut ultricies.",
-    gradient: "linear-gradient(744deg, #FFD700, #FFC107 60%, #FF8F00)", // Royal Yellow
+    gradient: "linear-gradient(744deg, #FFD700, #FFC107 60%, #FF8F00)", // Yellow
   },
   {
     id: 3,
     title: "Product Creation",
     description: "Phasellus urna felis, vehicula a ultricie vulp utate ut ultricies.",
-    gradient: "linear-gradient(744deg, #006400, #228B22 60%, #32CD32)", // Deep Green
+    gradient: "linear-gradient(744deg, #006400, #228B22 60%, #32CD32)", // Green
   },
   {
     id: 4,
     title: "Edits Work with Client",
     description: "Phasellus urna felis, vehicula a ultricie vulp utate ut ultricies.",
-    gradient: "linear-gradient(744deg, #00008B, #1E90FF 60%, #00BFFF)", // Royal Blue
+    gradient: "linear-gradient(744deg, #00008B, #1E90FF 60%, #00BFFF)", // Blue
   },
 ];
 
 const StepsSection = () => {
+  const [activeGradient, setActiveGradient] = useState('');
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
   return (
-    <section className="py-20 min-h-screen ">
-      {/* Header with Framer Motion */}
+    <section
+      className="py-20 min-h-screen transition-all duration-500"
+      style={{ background: activeGradient || '#f9fafb' }}
+    >
+      {/* Header */}
       <motion.div
         className="text-center mb-16"
         initial={{ opacity: 0, y: -50 }}
@@ -63,37 +68,37 @@ const StepsSection = () => {
               <motion.div
                 key={index}
                 data-aos={animationType}
-                className="group e-card playing relative w-[300px] h-[400px] bg-transparent shadow-2xl rounded-2xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-3xl transition ease-in-out duration-500"
+                className="group e-card playing relative w-[300px] h-[400px] bg-transparent shadow-2xl rounded-2xl overflow-hidden transform transition duration-500 hover:scale-105"
+                onMouseEnter={() => setActiveGradient(step.gradient)}
+                onMouseLeave={() => setActiveGradient('')}
+                style={{
+                  border: activeGradient === step.gradient ? '2px solid white' : '2px solid transparent',
+                }}
               >
-
                 {/* Waves */}
-                <div
-                  className="wave absolute w-[540px] h-[700px] opacity-60 left-0 top-0 -ml-[50%] -mt-[70%] rounded-[40%]"
-                  style={{ background: step.gradient }}
-                ></div>
-                <div
-                  className="wave absolute w-[540px] h-[700px] opacity-60 left-0 top-[210px] -ml-[50%] rounded-[40%]"
-                  style={{ background: step.gradient }}
-                ></div>
-                <div
-                  className="wave absolute w-[540px] h-[700px] opacity-60 left-0 top-[210px] -ml-[50%] rounded-[40%]"
-                  style={{ background: step.gradient }}
-                ></div>
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`wave absolute w-[540px] h-[700px] opacity-60 left-0 ${
+                      i === 0 ? 'top-0 -mt-[70%]' : 'top-[210px]'
+                    } -ml-[50%] rounded-[40%]`}
+                    style={{ background: step.gradient }}
+                  />
+                ))}
 
                 {/* Step Number */}
-                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 border-2 border-white text-white font-bold text-xl w-12 h-12 flex items-center justify-center rounded-full shadow-lg z-10">
+                <div className="absolute group-hover:scale-110 top-20 left-1/2 transform -translate-x-1/2 border-2 border-white text-white font-bold text-xl w-12 h-12 flex items-center justify-center rounded-full shadow-lg z-10">
                   {step.id}
                 </div>
 
                 {/* Card Content */}
                 <div className="infotop absolute top-36 left-0 right-0 text-center text-white px-6">
-                  <h3 className="text-4xl font-semibold mb-8 transition-transform duration-300 group-hover:scale-105">
+                  <h3 className="text-4xl font-semibold mb-8 transition-transform duration-300 group-hover:scale-110">
                     {step.title}
                   </h3>
-                  <p className="text-xl p-2 font-light transition-transform duration-300 group-hover:scale-105">
+                  <p className="text-xl p-2 font-light transition-transform duration-300 group-hover:scale-110">
                     {step.description}
                   </p>
-
                 </div>
               </motion.div>
             );
@@ -105,6 +110,7 @@ const StepsSection = () => {
       <style jsx>{`
         .wave {
           animation: wave 155s infinite linear;
+          pointer-events: none;
         }
 
         .playing .wave {
@@ -125,6 +131,10 @@ const StepsSection = () => {
 
         .playing .wave:nth-child(3) {
           animation-duration: 10000ms;
+        }
+
+        .group:hover .wave {
+          animation-play-state: paused;
         }
 
         @keyframes wave {
