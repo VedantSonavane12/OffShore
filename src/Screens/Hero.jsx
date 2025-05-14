@@ -76,22 +76,6 @@ const AnimatedSection = ({ children, className, initialX = 0 }) => {
   );
 };
 
-const FloatingElement = ({ children, delay = 0, duration = 6, className }) => (
-  <motion.div
-    className={className}
-    animate={{ y: [0, -15, 0], x: [0, 5, 0], rotate: [0, 1, 0] }}
-    transition={{
-      duration,
-      ease: "easeInOut",
-      repeat: Infinity,
-      repeatType: "reverse",
-      delay,
-    }}
-  >
-    {children}
-  </motion.div>
-);
-
 const CardCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -134,7 +118,7 @@ const CardCarousel = () => {
                   <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <motion.h2
-                      className="text-5xl font-bold text-white"
+                      className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: isActive ? 0.2 : 0 }}
@@ -144,7 +128,7 @@ const CardCarousel = () => {
                   </div>
                   <motion.a
                     href="#"
-                    className="absolute bottom-4 right-4 text-white bg-white/30 px-4 py-2 rounded-full text-sm hover:bg-white/60 transition-colors"
+                    className="absolute bottom-4 right-4 text-white bg-white/30 px-4 py-2 rounded-full text-xs sm:text-sm hover:bg-white/60 transition-colors"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: isActive ? 0.4 : 0 }}
@@ -170,29 +154,32 @@ const Hero = () => {
 
   const shapeY1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const shapeY2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const shapeY3 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const shapeY3 = useTransform(scrollYProgress, [0, 1], [0, 1], [0, -150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <div
-      className="relative w-full h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center"
+      className="relative w-full min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center py-8 sm:py-12"
       ref={containerRef}
     >
       <motion.div
-        className="container mx-auto px-6 relative z-10 max-w-7xl"
+        className="container mx-auto px-4 sm:px-6 relative z-10 max-w-full sm:max-w-7xl"
         style={{ opacity }}
       >
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12">
           {/* Left Column */}
-          <AnimatedSection className="lg:w-5/12 text-center lg:text-left lg:pl-8" initialX={-100}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight">
-              <AnimatedText text="Easy" className="block mb-3" delay={0.2} />
+          <AnimatedSection
+            className="w-full lg:w-5/12 text-center lg:text-left px-4 sm:px-8"
+            initialX={-100}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight">
+              <AnimatedText text="Easy" className="block mb-2 sm:mb-3" delay={0.2} />
               <br />
-              <AnimatedText text="scheduling" className="block mb-3" delay={0.4} />
+              <AnimatedText text="scheduling" className="block mb-2 sm:mb-3" delay={0.4} />
               <AnimatedText text="ahead" className="block" delay={0.6} />
             </h1>
             <motion.p
-              className="mt-6 text-slate-600 text-lg"
+              className="mt-4 sm:mt-6 text-slate-600 text-base sm:text-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -200,13 +187,13 @@ const Hero = () => {
               Join 20 million professionals who easily book meetings with the #1 scheduling tool.
             </motion.p>
             <motion.div
-              className="mt-8 flex flex-col gap-4 max-w-md mx-auto lg:mx-0"
+              className="mt-6 sm:mt-8 flex flex-col gap-4 max-w-xs sm:max-w-md mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
             >
               <motion.button
-                className="flex items-center justify-center gap-2 bg-[#256bff] text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors"
+                className="flex items-center justify-center gap-2 bg-[#256bff] text-white py-2 sm:py-3 px-4 sm:px-6 rounded-md hover:bg-blue-700 transition-colors text-sm sm:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -223,8 +210,8 @@ const Hero = () => {
           </AnimatedSection>
 
           {/* Right Column */}
-          <AnimatedSection className="lg:w-7/12" initialX={100}>
-            <div className="relative h-[500px] perspective-1000">
+          <AnimatedSection className="w-full lg:w-7/12 px-4 sm:px-8" initialX={100}>
+            <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] perspective-1000">
               <CardCarousel />
             </div>
           </AnimatedSection>
