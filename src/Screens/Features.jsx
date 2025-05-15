@@ -117,7 +117,7 @@ const FeatureCard = React.memo(({ data, dataIndex }) => {
             className={`absolute bottom-0 right-0 w-32 h-16 bg-${readMoreColor} rounded-tl-full overflow-hidden flex items-center justify-center`}
           >
             <div className="flex items-center gap-2 text-white text-sm font-medium">
-              <span>Read More</span>
+             <p>Check out</p>
               <motion.div variants={arrowVariants}>
                 <ChevronRightCircle size={18} />
               </motion.div>

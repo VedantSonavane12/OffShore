@@ -97,7 +97,7 @@ const Model = () => {
               <div className="flex items-center mb-1">
                 {section.icon}
                 <h3
-                  className={`text-xl font-semibold transition-all duration-300 ${
+                  className={`text-xl  transition-all duration-300 ${
                     activeSection === index ? "text-gray-900" : "text-gray-600"
                   }`}
                 >
@@ -143,7 +143,7 @@ const Model = () => {
             {/* "Choose Model" Button */}
             <div className="absolute bottom-4 right-4">
               <button className="bg-white/30 text-white px-4 py-2 rounded-full backdrop-blur-full  shadow-md hover:bg-white/50 transition duration-300">
-                Choose Model
+              <p>Choose Model</p>  
               </button>
             </div>
           </div>

@@ -2,13 +2,13 @@
 
 @font-face {
   font-family: "Chillax";
-  src: url("./PlusJakartaSans-VariableFont_wght.ttf") format("truetype");
+  src: url("./Gilroy-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "secondary";
-  src: url("./goldplay-medium.ttf") format("truetype");
+  src: url("./Gilroy-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -21,7 +21,7 @@
   
 }/* Animation for Gradient */
 
-.secondary
+p
 {
   font-family: "secondary";
 }

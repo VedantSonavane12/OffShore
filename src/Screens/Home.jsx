@@ -3,6 +3,8 @@ import Hero from './Hero';
 import Features from './Features';
 import Steps from './Steps'
 import Models from './model'
+import Scheduling from './Scheduling'
+
 
 
 const Home = () => {
@@ -11,7 +13,8 @@ const Home = () => {
             <Hero />
             <Features />
             <Steps />
-               <Models />
+            <Models />
+            <Scheduling />
 
 
         </div>
