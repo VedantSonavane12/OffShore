@@ -4,6 +4,8 @@ import Features from './Features';
 import Steps from './Steps'
 import Models from './model'
 import Scheduling from './Scheduling'
+import Testimonials from './Testimonials'
+
 
 
 
@@ -15,6 +17,8 @@ const Home = () => {
             <Steps />
             <Models />
             <Scheduling />
+                        <Testimonials />
+
 
 
         </div>

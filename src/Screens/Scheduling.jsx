@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DatePicker from "react-datepicker";
@@ -8,13 +7,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const services = [
-  { name: "Architecture" },
-  { name: "Interior Design" },
-  { name: "3D Visualization" },
-  { name: "BIM Services" },
-  { name: "IT Services" },
-  { name: "Admin Services" },
-  { name: "Marketing" },
+  { name: "Architecture", bgColor: "bg-red-500" },
+  { name: "Interior Design", bgColor: "bg-yellow-500" },
+  { name: "3D Visualization", bgColor: "bg-blue-500" },
+  { name: "BIM Services", bgColor: "bg-green-500" },
+  { name: "IT Services", bgColor: "bg-purple-500" },
+  { name: "Admin Services", bgColor: "bg-pink-500" },
+  { name: "Marketing", bgColor: "bg-gray-500" },
 ];
 
 const timeSlots = [
@@ -28,6 +27,8 @@ const timeSlots = [
   "04:00 PM",
   "05:00 PM",
 ];
+
+const employeeOptions = ["0-5", "5-20", "20-50", "50+"];
 
 // Custom Clock Component
 const MinimalClock = ({ value }) => {
@@ -71,6 +72,8 @@ const ScheduleMeeting = () => {
     email: "",
     phone: "",
     message: "",
+    companyLocation: "",
+    employees: "",
   });
   const [animationComplete, setAnimationComplete] = useState([false, false, false, false]);
 
@@ -126,7 +129,7 @@ const ScheduleMeeting = () => {
   };
 
   return (
-    <div className="min-h-screen  px-4 py-12">
+    <div className="min-h-screen px-4 py-12">
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-12" data-aos="fade-up">
         <motion.h1
@@ -211,7 +214,7 @@ const ScheduleMeeting = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20" />
             <motion.div
-              className="absolute bottom-0 left-0 right-0 p-6 text-white"
+              className="absolute bottom-0 left remota la funcion de los botones de navegacion y cambialos por botones de tailwind que tengan un diseño similar pero que sean solo de color azul y que tengan un icono de flecha a la izquierda y derecha respectivamente, ademas de que el texto sea blanco y el fondo azul, y que el boton de submit sea verde con el mismo diseño -0 right-0 p-6 text-white"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -250,11 +253,11 @@ const ScheduleMeeting = () => {
                         <motion.button
                           key={service.name}
                           onClick={() => handleServiceSelect(service)}
-                          className={`p-4 rounded-xl border ${
+                          className={`p-4 rounded-xl text-white font-medium text-sm transition-all ${
                             form.service === service.name
-                              ? "border-blue-500 bg-blue-50"
-                              : "border-gray-100 bg-gray-50"
-                          } hover:border-blue-300 transition-all text-gray-700 text-sm font-medium`}
+                              ? `${service.bgColor} ring-2 ring-offset-2 ring-white`
+                              : service.bgColor
+                          } hover:brightness-110`}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
@@ -365,6 +368,39 @@ const ScheduleMeeting = () => {
                           />
                         </div>
                       </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-600 mb-1">
+                            Company Location
+                          </label>
+                          <input
+                            type="text"
+                            name="companyLocation"
+                            value={form.companyLocation}
+                            onChange={handleChange}
+                            placeholder="New York, NY"
+                            className="w-full p-3 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 focus:outline-none text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-600 mb-1">
+                            Number of Employees
+                          </label>
+                          <select
+                            name="employees"
+                            value={form.employees}
+                            onChange={handleChange}
+                            className="w-full p-3 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 focus:outline-none text-sm"
+                          >
+                            <option value="">Select number of employees</option>
+                            {employeeOptions.map((option) => (
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-600 mb-1">
                           Phone Number
@@ -412,6 +448,14 @@ const ScheduleMeeting = () => {
                             <span className="font-medium">Time:</span>{" "}
                             {form.time || "Not selected"}
                           </li>
+                          <li>
+                            <span className="font-medium">Company Location:</span>{" "}
+                            {form.companyLocation || "Not provided"}
+                          </li>
+                          <li>
+                            <span className="font-medium">Employees:</span>{" "}
+                            {form.employees || "Not selected"}
+                          </li>
                         </ul>
                       </motion.div>
                     </div>
@@ -422,37 +466,68 @@ const ScheduleMeeting = () => {
 
             {/* Navigation Buttons */}
             <div className="flex justify-between mt-6 pt-4 border-t border-gray-100">
-              <motion.button
+              <button
                 onClick={handleBack}
                 disabled={step === 1}
-                className="px-4 py-2 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-sm text-gray-700"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
                 Back
-              </motion.button>
+              </button>
               {step < 4 ? (
-                <motion.button
+                <button
                   onClick={handleNext}
                   disabled={!isStepComplete()}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next
-                  <ChevronRight className="w-4 h-4" />
-                </motion.button>
+                  <svg
+                    className="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
               ) : (
-                <motion.button
+                <button
                   onClick={handleSubmit}
                   disabled={!isStepComplete()}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Schedule Meeting
-                </motion.button>
+                  <svg
+                    className="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </button>
               )}
             </div>
           </div>

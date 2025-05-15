@@ -108,7 +108,7 @@ const Model = () => {
               {/* Description */}
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  activeSection === index ? "max-h-40 opacity-100 mt-2 p-2" : "max-h-0 opacity-0"
+                  activeSection === index ? " opacity-100 mt-2 p-2" : "max-h-0 opacity-0"
                 }`}
               >
                 <p className="text-md text-gray-600">{section.description}</p>
