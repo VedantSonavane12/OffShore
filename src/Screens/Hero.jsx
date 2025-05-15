@@ -14,7 +14,7 @@ import card1 from "../assets/architecture.webp";
 import card2 from "../assets/interior.webp";
 import card3 from "../assets/BIM.webp";
 import card4 from "../assets/3DVisualization.webp";
-import card6 from "../assets/IT.png";
+import card6 from "../assets/it.webp";
 import card7 from "../assets/Marketing.jpeg";
 
 // Carousel data
