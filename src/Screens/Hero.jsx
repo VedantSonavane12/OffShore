@@ -184,7 +184,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              Join 20 million professionals who easily book meetings with the #1 scheduling tool.
+              Join 40 million professionals who easily book meetings with the #1 scheduling tool.
             </motion.p>
             <motion.div
               className="mt-6 sm:mt-8 flex flex-col gap-4 max-w-xs sm:max-w-md mx-auto lg:mx-0"
