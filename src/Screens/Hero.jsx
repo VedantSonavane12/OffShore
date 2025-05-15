@@ -164,7 +164,7 @@ const Hero = () => {
     >
       <motion.div
         className="container mx-auto px-4 sm:px-6 relative z-10 max-w-full sm:max-w-7xl"
-        style={{ opacity }}
+       
       >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12">
           {/* Left Column */}

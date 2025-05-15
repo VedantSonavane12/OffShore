@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { StackedCarousel } from 'react-stacked-center-carousel';
-import { ChevronRightCircle, ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
-import { motion } from 'framer-motion'; // Import Framer Motion
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
+import { ChevronRightCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AOS from 'aos';
+import gsap from 'gsap';
+import 'aos/dist/aos.css';
 
 const cardData = [
   {
@@ -40,61 +41,48 @@ const cardData = [
   },
 ];
 
-// Array of colors for the "Read More" background (repeating cycle)
-const readMoreColors = [
-  'red-500',
-  'yellow-500',
-  'green-500',
-  'blue-500',
-];
-
-// Map Tailwind color classes to their corresponding CSS color values
+const readMoreColors = ['red-500', 'yellow-500', 'green-500', 'blue-500'];
 const colorMap = {
   'red-500': '#ef4444',
   'yellow-500': '#eab308',
-  'green-500': '#22c45e',
+  'green-500': '#22c55e',
   'blue-500': '#3b82f6',
 };
 
 const FeatureCard = React.memo(({ data, dataIndex }) => {
-  // Select a color for the "Read More" background based on the card's index
   const readMoreColor = readMoreColors[dataIndex % readMoreColors.length];
-  const hoverBgColor = colorMap[readMoreColor]; // Get the CSS color value for hover
+  const hoverBgColor = colorMap[readMoreColor];
 
-  // Framer Motion variants for the card
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
-  // Framer Motion variants for the "Read More" section
   const readMoreVariants = {
     hidden: { opacity: 0, x: 20 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut", delay: 0.2 } },
     hover: { scale: 1.1, transition: { duration: 0.3 } },
   };
 
-  // Framer Motion variants for the arrow
   const arrowVariants = {
     hover: { x: 4, transition: { duration: 0.3 } },
   };
 
   return (
     <motion.div
-      className={`relative rounded-2xl shadow-md flex flex-col justify-between px-6 py-8 bg-white border-2 border-gray-300 overflow-hidden group`}
+      className="relative rounded-2xl shadow-md flex flex-col justify-between px-6 py-8 bg-white border-2 border-gray-300 overflow-hidden group"
       style={{
         width: '550px',
         height: '250px',
-        transition: 'background-color 0.5s ease', // Smooth transition for background color
-        backgroundColor: 'white', // Initial background color
+        transition: 'background-color 0.5s ease',
+        backgroundColor: 'white',
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverBgColor)} // Change background on hover
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'white')} // Reset background on leave
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverBgColor)}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'white')}
       variants={cardVariants}
       initial="hidden"
       animate="visible"
     >
-      {/* Title and Description */}
       <div className="flex flex-col justify-start relative z-20">
         <h3 className="text-4xl font-bold text-gray-700 mb-6 text-left tracking-tight group-hover:text-white transition-colors duration-500">
           {data.title}
@@ -104,7 +92,6 @@ const FeatureCard = React.memo(({ data, dataIndex }) => {
         </p>
       </div>
 
-      {/* Read More Text in Bottom-Right */}
       <motion.div
         className="absolute bottom-0 right-0 z-10"
         variants={readMoreVariants}
@@ -117,7 +104,7 @@ const FeatureCard = React.memo(({ data, dataIndex }) => {
             className={`absolute bottom-0 right-0 w-32 h-16 bg-${readMoreColor} rounded-tl-full overflow-hidden flex items-center justify-center`}
           >
             <div className="flex items-center gap-2 text-white text-sm font-medium">
-             <p>Check out</p>
+              <p>Check out</p>
               <motion.div variants={arrowVariants}>
                 <ChevronRightCircle size={18} />
               </motion.div>
@@ -132,21 +119,40 @@ const FeatureCard = React.memo(({ data, dataIndex }) => {
 const Features = () => {
   const ref = useRef();
 
-  // Auto-scroll every 2 seconds
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true }); // Initialize AOS with a 1s duration and run once
+    AOS.init({ duration: 1000, once: true });
+
     const interval = setInterval(() => {
       ref.current?.goNext();
     }, 2000);
+
+    // GSAP slide-in for heading & subtext
+    gsap.from(".gsap-heading span", {
+      y: 60,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power4.out",
+    });
+
+    gsap.from(".gsap-subtext", {
+      x: 80,
+      opacity: 0,
+      duration: 1,
+      delay: 0.5,
+      ease: "power2.out",
+    });
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="py-20 px-6 text-center" data-aos="fade-up">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight gsap-heading">
         Your Trusted Offshore AEC Partner
+       
       </h1>
-      <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+      <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto ">
         Deliver seamless projects with our exceptional features and expertise.
       </p>
 
@@ -165,7 +171,39 @@ const Features = () => {
         />
       </div>
 
-      
+      <div className="relative w-full mt-24 overflow-hidden">
+        <div className="absolute top-0 left-0 w-24 h-full z-10 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-24 h-full z-10 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none"></div>
+
+        <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed" data-aos="fade-right">
+          We bring together the finest talent and the most advanced technologies to empower your business.
+        </p>
+
+        <motion.div
+          className="flex gap-12 w-max"
+          initial={{ x: 0 }}
+          animate={{ x: '-50%' }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: 'linear',
+          }}
+        >
+          {[
+            'V-Ray', 'Lumion', 'Photoshop', 'Premiere Pro', 'Illustrator',
+            'After Effects', 'Node.js', 'Cinema 4D',
+          ].flatMap(tool => [tool, tool]).map((tool, idx) => (
+            <div key={idx} className="flex flex-col items-center min-w-[100px]">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg"
+                alt={tool}
+                className="w-10 h-10"
+              />
+              <p className="text-sm text-gray-600 mt-2">{tool}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };

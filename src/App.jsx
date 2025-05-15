@@ -1,13 +1,12 @@
 import React from "react";
-import Home from "./Screens/Home"; // Import Home component from screens folder
-import Navbar from "./Components/Navbar"; // Import Navbar component from components folder
 import './index.css';
+import Loader from "./Components/Loader"; // Import the Loader component
 
 function App() {
   return (
     <div>
-      <Home />
-     </div>
+      <Loader />
+    </div>
   );
 }
 

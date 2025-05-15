@@ -1,30 +1,63 @@
-// src/components/Loader.jsx
-import React, { useEffect, useState } from 'react';
-import Logo from '../assets/Logo.jpeg';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Home from '../Screens/Home';
+import introVideo from '../assets/Offshore 365 animation white on blue.mp4';
 
 const Loader = () => {
-  const [hide, setHide] = useState(false);
+  const videoRef = useRef(null);
+  const [showHome, setShowHome] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setHide(true);
-    }, 3000); // 3 seconds before hiding
+    const video = videoRef.current;
 
-    return () => clearTimeout(timer);
+    // Backup timeout in case the video doesn't emit 'ended' (7 seconds)
+    const timeout = setTimeout(() => {
+      setShowHome(true);
+    }, 7000);
+
+    const handleEnded = () => {
+      clearTimeout(timeout);
+      setShowHome(true);
+    };
+
+    if (video) {
+      video.addEventListener('ended', handleEnded);
+    }
+
+    return () => {
+      if (video) video.removeEventListener('ended', handleEnded);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
-    <div
-      className={`fixed inset-0 bg-white z-50 flex items-center justify-center transition-opacity duration-1000 ease-in-out ${
-        hide ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-    >
-      <img
-        src={Logo}
-        alt="Offshore365 Logo"
-        className="w-full h-full object-contain animate-fadeInScale"
-      />
-    </div>
+    <AnimatePresence>
+      {!showHome ? (
+        <motion.div
+          className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <video
+            ref={videoRef}
+            src={introVideo}
+            autoPlay
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Home />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
