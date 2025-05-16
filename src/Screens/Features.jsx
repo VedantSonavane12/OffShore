@@ -162,8 +162,8 @@ const Features = () => {
           slideComponent={(props) => (
             <FeatureCard {...props} data={cardData[props.dataIndex]} />
           )}
-          slideWidth={300}
-          carouselWidth={1500}
+          slideWidth={360}
+          carouselWidth={2000}
           data={cardData}
           maxVisibleSlide={5}
           customScales={[1, 0.9, 0.8, 0.7]}

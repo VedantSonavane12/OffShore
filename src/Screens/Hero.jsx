@@ -159,7 +159,7 @@ const Hero = () => {
 
   return (
     <div
-      className="relative w-full min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center py-8 sm:py-12"
+      className=" w-full min-h-screen bg-white flex items-top justify-top py-16 "
       ref={containerRef}
     >
       <motion.div
